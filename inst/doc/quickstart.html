@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="author" content="Alexandra Erdmann" />
+
+<meta name="date" content="2023-01-27" />
+
+<title>simIDM: Getting Started</title>
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">simIDM: Getting Started</h1>
+<h4 class="author">Alexandra Erdmann</h4>
+<h4 class="date">2023-01-27</h4>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The purpose of this vignette is to explain the use of <code>getClinicalTrials()</code>, the core function of this package. <code>getClinicalTrials()</code> can be used to simulate a large number of clinical trials with endpoints progression-free survival (PFS) and overall survival (OS). The underlying model is a survival multistate model with an initial state, an intermediate <code>progression</code> state and an absorbing <code>death</code> state. The multistate model approach has the advantage of naturally accounting for the correlation between the PFS and OS endpoints <span class="citation">(Meller, Beyersmann, and Rufibach 2019)</span>. OS is defined as the time to reach the absorbing state death and PFS is defined as the time to reach the absorbing state <code>death</code> or the intermediate state <code>progression</code>, whichever occurs first. Figure 1 shows the multistate model with the corresponding transition hazards. To get started quickly, we show a simple and quick example of a clinical trial simulation.</p>
+<div class="figure">
+<img src="data:image/png;base64,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" alt="Figure 1 - Multistate model with indermediate state progession and absorbing state death" width="60%" />
+<p class="caption">
+Figure 1 - Multistate model with indermediate state progession and absorbing state death
+</p>
+</div>
+</div>
+<div id="simulation-specifications" class="section level2">
+<h2>Simulation Specifications</h2>
+<p><code>getClinicalTrials()</code> simulates trials with an arbitrary number of treatment arms. In general, the argument specifications were tried to be similar to the R-package Rpact <span class="citation">(Wassmer and Pahlke 2021)</span> in order to be more user-friendly. For illustration, we consider a trial with two arms. The number of patients per trial must be specified. In our example simulation there are 30 patients in the first treatment arm and 60 in the second treatment arm:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">nPat &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">60</span>)</a></code></pre></div>
+<p>The transition parameters describing the transition hazards per treatment arm must be passed as a list to <code>getClinicalTrials()</code>. The class <code>TransitionParameters</code> contains the elements <code>hazards</code>, <code>intervals</code>, <code>weibull_rates</code> and <code>family</code> which allow to describe transition hazards leading to exponential, piecewise exponential or Weibull distributed survival times. There are some helper functions in the <code>simIDM</code> package to create the appropriate transition parameters for the desired distribution. - <code>exponential_transition()</code>: creates a list with class <code>TransitionParameters</code> containing hazards, time intervals and Weibull rates for exponential event times in an illness-death model. - <code>piecewise_exponential()</code>: creates a list with class <code>TransitionParameters</code> containing hazards, time intervals and Weibull rates for piecewise exponential event times in an illness-death model. - <code>weibull_transition()</code>: creates a list with class <code>TransitionParameters</code> containing hazards, time intervals and Weibull rates for Weibull distributed event times in an illness-death model.</p>
+<p>In our example we consider constant hazard rates, i.e. exponential distributed event times.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(simIDM)</a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3">transitionGroup1 &lt;-<span class="st"> </span><span class="kw">exponential_transition</span>(<span class="dt">h01 =</span> <span class="fl">1.2</span>, <span class="dt">h02 =</span> <span class="fl">1.5</span>, <span class="dt">h12 =</span> <span class="fl">1.6</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw">print</span>(transitionGroup1<span class="op">$</span>hazards)</a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; $h01</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; [1] 1.2</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; $h02</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; [1] 1.5</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; $h12</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; [1] 1.6</span></a>
+<a class="sourceLine" id="cb2-13" title="13">transitionGroup2 &lt;-<span class="st"> </span><span class="kw">exponential_transition</span>(<span class="dt">h01 =</span> <span class="dv">1</span>, <span class="dt">h02 =</span> <span class="fl">1.3</span>, <span class="dt">h12 =</span> <span class="fl">1.7</span>)</a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="kw">print</span>(transitionGroup2<span class="op">$</span>hazards)</a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; $h01</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; [1] 1</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; $h02</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; [1] 1.3</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt; $h12</span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; [1] 1.7</span></a>
+<a class="sourceLine" id="cb2-23" title="23">transitionbyArm &lt;-<span class="st"> </span><span class="kw">list</span>(transitionGroup1, transitionGroup2)</a></code></pre></div>
+<p>The specification for random patient dropouts can be passed directly to <code>getClinicalTrials()</code>. A list with elements <code>rate</code> and <code>time</code> specifies the drop-out probability. Random censoring times are generated using the exponential distribution. <code>dropout$rate</code> specifies the drop-out probability per <code>dropout$time</code> time units. The dropout parameters can be specified either as one list that should be applied to all treatment groups or a separate list for each treatment group. If <code>dropout$rate</code> is equal to 0, then no censoring due to dropout is applied. In our example we expect that 10% of the patients drop-out within 12 months per treatment group (we take month as the time unit of our trial), thus we specify:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">dropout &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">rate =</span> <span class="fl">0.1</span>, <span class="dt">time =</span> <span class="dv">12</span>)</a></code></pre></div>
+<p>There are two time-scales that we need to consider when simulating multistate data. The individual time scale with start in the initial state at time 0 and the study time scale, which matches the individual time scale only if the study start time (e.g. randomization date) is the same time in calendar time for all patients. It can also be specified that patients enter the study in a staggered manner. Uniformly distributed random variables are used to generate staggered study entry times. There are two possibilities for the specification: Either, the length of the accrual period is specified, e.g. 12 month, in which case the staggered entry times are generated in each treatment group using random variables <span class="math inline">\(U ~Unif(0, 12)\)</span>. Or, it is specified how many patients are recruited per time unit in each treatment group. Thus, if 10 patients are recruited per month, then the staggered entry times are generated using random variables <span class="math inline">\(U ~Unif(0, 30/10)\)</span>. A list <code>accural</code> with elements <code>accrualParam</code> and <code>accrualValue</code> is passed to <code>getClinicalTrials()</code> describing the accrual intensity. For <code>accrualParam</code> equal time, <code>accrualValue</code>describes the length of the accrual period. For <code>accrualParam</code> equal intensity, it describes the number of patients recruited per time unit. If <code>accrualValue</code> is equal to 0, all patients start at the same calender time in the initial state. The accrual parameters can be specified either as one list that should be applied to all treatment groups or a separate list for each treatment group.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># first example</span></a>
+<a class="sourceLine" id="cb4-2" title="2">accrual &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">param =</span> <span class="st">&quot;intensity&quot;</span>, <span class="dt">value =</span> <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="co"># second example</span></a>
+<a class="sourceLine" id="cb4-4" title="4">accrual &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">param =</span> <span class="st">&quot;intensity&quot;</span>, <span class="dt">value =</span> <span class="dv">3</span>)</a></code></pre></div>
+</div>
+<div id="application" class="section level2">
+<h2>Application</h2>
+<p>We now simulate 100 (<code>nRep</code>=100) clinical trials with the parameters described and specified above. There are two options for how the output data is presented, one row per patient or one row per transition and patient. Let’s take a look at both.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">simStudies1 &lt;-<span class="st"> </span><span class="kw">getClinicalTrials</span>(</a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="dt">nRep =</span> <span class="dv">100</span>, <span class="dt">nPat =</span> nPat, <span class="dt">seed =</span> <span class="dv">1234</span>, <span class="dt">datType =</span> <span class="st">&quot;1rowTransition&quot;</span>,</a>
+<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">transitionByArm =</span> transitionbyArm, <span class="dt">dropout =</span> dropout,</a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">accrual =</span> accrual</a>
+<a class="sourceLine" id="cb5-5" title="5">)</a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7">simStudies2 &lt;-<span class="st"> </span><span class="kw">getClinicalTrials</span>(</a>
+<a class="sourceLine" id="cb5-8" title="8">  <span class="dt">nRep =</span> <span class="dv">100</span>, <span class="dt">nPat =</span> nPat, <span class="dt">seed =</span> <span class="dv">1234</span>, <span class="dt">datType =</span> <span class="st">&quot;1rowPatient&quot;</span>,</a>
+<a class="sourceLine" id="cb5-9" title="9">  <span class="dt">transitionByArm =</span> transitionbyArm, <span class="dt">dropout =</span> dropout,</a>
+<a class="sourceLine" id="cb5-10" title="10">  <span class="dt">accrual =</span> accrual</a>
+<a class="sourceLine" id="cb5-11" title="11">)</a></code></pre></div>
+</div>
+<div id="output-data" class="section level2">
+<h2>Output Data</h2>
+<p>We get as output a list with <code>nRep</code> elements, each containing a data set of a single simulated trial. The specification of the seed ensures, that the the datasets of the two lists contain the same study data, only the presentation is different. <code>simStudies1</code> shows the transition times per patient and <code>simStudies2</code> the PFS and OS times per patient.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">head</span>(simStudies1[[<span class="dv">1</span>]], <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co">#&gt;   id from to     entry       exit entryAct   exitAct    censAct trt</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co">#&gt; 1  1    0  2 0.0000000 0.46787743 1.234711  1.702588 286.171654   1</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">#&gt; 2  2    0  2 0.0000000 0.26010392 7.971605  8.231709  36.076123   1</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co">#&gt; 3  3    0  2 0.0000000 0.06150124 7.442772  7.504273   8.192422   1</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">#&gt; 4  4    0  1 0.0000000 0.25964639 9.159742  9.419389 207.649214   1</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">#&gt; 5  4    1  2 0.2596464 2.13580247 9.419389 11.295545 207.649214   1</span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">#&gt; 6  5    0  2 0.0000000 0.25227459 9.945982 10.198257  54.044011   1</span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="kw">head</span>(simStudies2[[<span class="dv">1</span>]], <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">#&gt;   id trt    PFStime CensoredPFS PFSevent     OStime CensoredOS OSevent</span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">#&gt; 1  1   1 0.46787743           0        1 0.46787743          0       1</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">#&gt; 2  2   1 0.26010392           0        1 0.26010392          0       1</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; 3  3   1 0.06150124           0        1 0.06150124          0       1</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt; 4  4   1 0.25964639           0        1 2.13580247          0       1</span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt; 5  5   1 0.25227459           0        1 0.25227459          0       1</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt;   recruitTime OStimeCal PFStimeCal</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; 1    1.234711  1.702588   1.702588</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; 2    7.971605  8.231709   8.231709</span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt; 3    7.442772  7.504273   7.504273</span></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt; 4    9.159742 11.295545   9.419389</span></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="co">#&gt; 5    9.945982 10.198257  10.198257</span></a></code></pre></div>
+<p>If we want to simulate only one trial, <code>getOneClinicalTrial</code> can also be used and with <code>getDatasetWideFormat</code> can be used to convert the dataset from being displayed with transition time to displaying PFS and OS times.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">simStudy_Trans &lt;-<span class="st"> </span><span class="kw">getOneClinicalTrial</span>(</a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="dt">nPat =</span> nPat, <span class="dt">transitionByArm =</span> transitionbyArm,</a>
+<a class="sourceLine" id="cb7-3" title="3">  <span class="dt">dropout =</span> dropout,</a>
+<a class="sourceLine" id="cb7-4" title="4">  <span class="dt">accrual =</span> accrual</a>
+<a class="sourceLine" id="cb7-5" title="5">)</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7">simStudy_PFSOS &lt;-<span class="st"> </span><span class="kw">getDatasetWideFormat</span>(simStudy_Trans)</a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="kw">head</span>(simStudy_Trans, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt;    id from to     entry       exit entryAct  exitAct   censAct trt</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt; 1   1    0  2 0.0000000 0.32181077 5.063864 5.385675 335.59100   1</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt; 2   2    0  1 0.0000000 0.44263317 8.083607 8.526241  96.83774   1</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt; 3   2    1  2 0.4426332 0.70429214 8.526241 8.787899  96.83774   1</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt; 4   3    0  2 0.0000000 0.03497509 4.478954 4.513929  74.19954   1</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 5   4    0  1 0.0000000 0.19827637 5.606922 5.805199  48.06033   1</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt; 6   4    1  2 0.1982764 0.93065829 5.805199 6.537580  48.06033   1</span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 7   5    0  2 0.0000000 0.06933912 9.077324 9.146663 119.07514   1</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="co">#&gt; 8   6    0  1 0.0000000 0.44623034 8.790901 9.237131  81.78121   1</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="co">#&gt; 9   6    1  2 0.4462303 0.44837021 9.237131 9.239271  81.78121   1</span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt; 10  7    0  1 0.0000000 0.63135991 8.441810 9.073170  97.36028   1</span></a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="kw">head</span>(simStudy_PFSOS, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb7-21" title="21"><span class="co">#&gt;    id trt    PFStime CensoredPFS PFSevent     OStime CensoredOS OSevent</span></a>
+<a class="sourceLine" id="cb7-22" title="22"><span class="co">#&gt; 1   1   1 0.32181077           0        1 0.32181077          0       1</span></a>
+<a class="sourceLine" id="cb7-23" title="23"><span class="co">#&gt; 2   2   1 0.44263317           0        1 0.70429214          0       1</span></a>
+<a class="sourceLine" id="cb7-24" title="24"><span class="co">#&gt; 3   3   1 0.03497509           0        1 0.03497509          0       1</span></a>
+<a class="sourceLine" id="cb7-25" title="25"><span class="co">#&gt; 4   4   1 0.19827637           0        1 0.93065829          0       1</span></a>
+<a class="sourceLine" id="cb7-26" title="26"><span class="co">#&gt; 5   5   1 0.06933912           0        1 0.06933912          0       1</span></a>
+<a class="sourceLine" id="cb7-27" title="27"><span class="co">#&gt; 6   6   1 0.44623034           0        1 0.44837021          0       1</span></a>
+<a class="sourceLine" id="cb7-28" title="28"><span class="co">#&gt; 7   7   1 0.63135991           0        1 1.69430412          0       1</span></a>
+<a class="sourceLine" id="cb7-29" title="29"><span class="co">#&gt; 8   8   1 1.60671207           0        1 1.60671207          0       1</span></a>
+<a class="sourceLine" id="cb7-30" title="30"><span class="co">#&gt; 9   9   1 0.22975563           0        1 0.50776145          0       1</span></a>
+<a class="sourceLine" id="cb7-31" title="31"><span class="co">#&gt; 10 10   1 0.06312064           0        1 0.06312064          0       1</span></a>
+<a class="sourceLine" id="cb7-32" title="32"><span class="co">#&gt;    recruitTime OStimeCal PFStimeCal</span></a>
+<a class="sourceLine" id="cb7-33" title="33"><span class="co">#&gt; 1    5.0638640  5.385675   5.385675</span></a>
+<a class="sourceLine" id="cb7-34" title="34"><span class="co">#&gt; 2    8.0836073  8.787899   8.526241</span></a>
+<a class="sourceLine" id="cb7-35" title="35"><span class="co">#&gt; 3    4.4789541  4.513929   4.513929</span></a>
+<a class="sourceLine" id="cb7-36" title="36"><span class="co">#&gt; 4    5.6069222  6.537580   5.805199</span></a>
+<a class="sourceLine" id="cb7-37" title="37"><span class="co">#&gt; 5    9.0773241  9.146663   9.146663</span></a>
+<a class="sourceLine" id="cb7-38" title="38"><span class="co">#&gt; 6    8.7909011  9.239271   9.237131</span></a>
+<a class="sourceLine" id="cb7-39" title="39"><span class="co">#&gt; 7    8.4418100 10.136114   9.073170</span></a>
+<a class="sourceLine" id="cb7-40" title="40"><span class="co">#&gt; 8    0.4754946  2.082207   2.082207</span></a>
+<a class="sourceLine" id="cb7-41" title="41"><span class="co">#&gt; 9    2.8876069  3.395368   3.117363</span></a>
+<a class="sourceLine" id="cb7-42" title="42"><span class="co">#&gt; 10   6.6150703  6.678191   6.678191</span></a></code></pre></div>
+<p>It is also possible to generate a a study that censors all patients after a pre-specified number of events (PFS or OS) occurred.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">simStudy_Trans &lt;-<span class="st"> </span><span class="kw">getOneClinicalTrial</span>(</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="dt">nPat =</span> nPat, <span class="dt">transitionByArm =</span> transitionbyArm,</a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">dropout =</span> dropout,</a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">accrual =</span> accrual</a>
+<a class="sourceLine" id="cb8-5" title="5">)</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">simStudy_PFSOS &lt;-<span class="st"> </span><span class="kw">getDatasetWideFormat</span>(simStudy_Trans)</a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="kw">head</span>(simStudy_Trans, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt;    id from to      entry       exit    entryAct   exitAct   censAct trt</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 1   1    0  1 0.00000000 0.06961555 7.780312062 7.8499276 102.95744   1</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 2   1    1  2 0.06961555 1.04718403 7.849927611 8.8274961 102.95744   1</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; 3   2    0  2 0.00000000 0.26116360 4.626272118 4.8874357  47.17874   1</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 4   3    0  2 0.00000000 0.15075060 6.508751956 6.6595026 168.99387   1</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 5   4    0  1 0.00000000 0.56212147 2.690053477 3.2521749  48.75687   1</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; 6   4    1  2 0.56212147 2.41915162 3.252174950 5.1092051  48.75687   1</span></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co">#&gt; 7   5    0  2 0.00000000 0.01950124 8.332294915 8.3517962 118.78556   1</span></a>
+<a class="sourceLine" id="cb8-17" title="17"><span class="co">#&gt; 8   6    0  2 0.00000000 0.47629626 0.024984612 0.5012809 145.10228   1</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="co">#&gt; 9   7    0  2 0.00000000 0.64391257 0.003990494 0.6479031  63.08757   1</span></a>
+<a class="sourceLine" id="cb8-19" title="19"><span class="co">#&gt; 10  8    0  2 0.00000000 0.56831986 7.120901188 7.6892211 659.17510   1</span></a>
+<a class="sourceLine" id="cb8-20" title="20"><span class="kw">head</span>(simStudy_PFSOS, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co">#&gt;    id trt    PFStime CensoredPFS PFSevent     OStime CensoredOS OSevent</span></a>
+<a class="sourceLine" id="cb8-22" title="22"><span class="co">#&gt; 1   1   1 0.06961555           0        1 1.04718403          0       1</span></a>
+<a class="sourceLine" id="cb8-23" title="23"><span class="co">#&gt; 2   2   1 0.26116360           0        1 0.26116360          0       1</span></a>
+<a class="sourceLine" id="cb8-24" title="24"><span class="co">#&gt; 3   3   1 0.15075060           0        1 0.15075060          0       1</span></a>
+<a class="sourceLine" id="cb8-25" title="25"><span class="co">#&gt; 4   4   1 0.56212147           0        1 2.41915162          0       1</span></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="co">#&gt; 5   5   1 0.01950124           0        1 0.01950124          0       1</span></a>
+<a class="sourceLine" id="cb8-27" title="27"><span class="co">#&gt; 6   6   1 0.47629626           0        1 0.47629626          0       1</span></a>
+<a class="sourceLine" id="cb8-28" title="28"><span class="co">#&gt; 7   7   1 0.64391257           0        1 0.64391257          0       1</span></a>
+<a class="sourceLine" id="cb8-29" title="29"><span class="co">#&gt; 8   8   1 0.56831986           0        1 0.56831986          0       1</span></a>
+<a class="sourceLine" id="cb8-30" title="30"><span class="co">#&gt; 9   9   1 0.27386179           0        1 0.27386179          0       1</span></a>
+<a class="sourceLine" id="cb8-31" title="31"><span class="co">#&gt; 10 10   1 0.41250249           0        1 1.15933490          0       1</span></a>
+<a class="sourceLine" id="cb8-32" title="32"><span class="co">#&gt;    recruitTime OStimeCal PFStimeCal</span></a>
+<a class="sourceLine" id="cb8-33" title="33"><span class="co">#&gt; 1  7.780312062 8.8274961  7.8499276</span></a>
+<a class="sourceLine" id="cb8-34" title="34"><span class="co">#&gt; 2  4.626272118 4.8874357  4.8874357</span></a>
+<a class="sourceLine" id="cb8-35" title="35"><span class="co">#&gt; 3  6.508751956 6.6595026  6.6595026</span></a>
+<a class="sourceLine" id="cb8-36" title="36"><span class="co">#&gt; 4  2.690053477 5.1092051  3.2521749</span></a>
+<a class="sourceLine" id="cb8-37" title="37"><span class="co">#&gt; 5  8.332294915 8.3517962  8.3517962</span></a>
+<a class="sourceLine" id="cb8-38" title="38"><span class="co">#&gt; 6  0.024984612 0.5012809  0.5012809</span></a>
+<a class="sourceLine" id="cb8-39" title="39"><span class="co">#&gt; 7  0.003990494 0.6479031  0.6479031</span></a>
+<a class="sourceLine" id="cb8-40" title="40"><span class="co">#&gt; 8  7.120901188 7.6892211  7.6892211</span></a>
+<a class="sourceLine" id="cb8-41" title="41"><span class="co">#&gt; 9  5.236761118 5.5106229  5.5106229</span></a>
+<a class="sourceLine" id="cb8-42" title="42"><span class="co">#&gt; 10 5.930290024 7.0896249  6.3427925</span></a>
+<a class="sourceLine" id="cb8-43" title="43"></a>
+<a class="sourceLine" id="cb8-44" title="44">simStudy_40PFS &lt;-<span class="st"> </span><span class="kw">censoringByNumberEvents</span>(<span class="dt">data =</span> simStudy_PFSOS, <span class="dt">eventNum =</span> <span class="dv">40</span>, <span class="dt">typeEvent =</span> <span class="st">&quot;PFS&quot;</span>)</a>
+<a class="sourceLine" id="cb8-45" title="45">simStudy_30POS &lt;-<span class="st"> </span><span class="kw">censoringByNumberEvents</span>(<span class="dt">data =</span> simStudy_PFSOS, <span class="dt">eventNum =</span> <span class="dv">30</span>, <span class="dt">typeEvent =</span> <span class="st">&quot;PFS&quot;</span>)</a>
+<a class="sourceLine" id="cb8-46" title="46">simStudy_40PFS</a>
+<a class="sourceLine" id="cb8-47" title="47"><span class="co">#&gt;    id trt    PFStime PFSevent     OStime CensoredOS OSevent recruitTime</span></a>
+<a class="sourceLine" id="cb8-48" title="48"><span class="co">#&gt; 1   2   1 0.26116360        1 0.26116360          0       1 4.626272118</span></a>
+<a class="sourceLine" id="cb8-49" title="49"><span class="co">#&gt; 2   3   1 0.15075060        1 0.15075060          0       1 6.508751956</span></a>
+<a class="sourceLine" id="cb8-50" title="50"><span class="co">#&gt; 3   4   1 0.56212147        1 2.41915162          0       1 2.690053477</span></a>
+<a class="sourceLine" id="cb8-51" title="51"><span class="co">#&gt; 4   6   1 0.47629626        1 0.47629626          0       1 0.024984612</span></a>
+<a class="sourceLine" id="cb8-52" title="52"><span class="co">#&gt; 5   7   1 0.64391257        1 0.64391257          0       1 0.003990494</span></a>
+<a class="sourceLine" id="cb8-53" title="53"><span class="co">#&gt; 6   9   1 0.27386179        1 0.27386179          0       1 5.236761118</span></a>
+<a class="sourceLine" id="cb8-54" title="54"><span class="co">#&gt; 7  10   1 0.41250249        1 0.89799098          1       0 5.930290024</span></a>
+<a class="sourceLine" id="cb8-55" title="55"><span class="co">#&gt; 8  12   1 0.62277501        1 0.64594684          0       1 4.695528368</span></a>
+<a class="sourceLine" id="cb8-56" title="56"><span class="co">#&gt; 9  13   1 0.12997017        1 0.12997017          0       1 1.509620696</span></a>
+<a class="sourceLine" id="cb8-57" title="57"><span class="co">#&gt; 10 14   1 1.04040922        1 1.04040922          0       1 1.242366128</span></a>
+<a class="sourceLine" id="cb8-58" title="58"><span class="co">#&gt; 11 15   1 0.02544847        1 0.02544847          0       1 4.443782684</span></a>
+<a class="sourceLine" id="cb8-59" title="59"><span class="co">#&gt; 12 17   1 0.57767544        1 0.57767544          0       1 0.823651729</span></a>
+<a class="sourceLine" id="cb8-60" title="60"><span class="co">#&gt; 13 18   1 0.09734062        1 0.09734062          0       1 1.893173764</span></a>
+<a class="sourceLine" id="cb8-61" title="61"><span class="co">#&gt; 14 19   1 0.16208977        1 0.16208977          0       1 4.184192105</span></a>
+<a class="sourceLine" id="cb8-62" title="62"><span class="co">#&gt; 15 21   1 0.14169789        1 0.14169789          0       1 5.848798379</span></a>
+<a class="sourceLine" id="cb8-63" title="63"><span class="co">#&gt; 16 22   1 0.04763364        1 0.04763364          0       1 3.433677910</span></a>
+<a class="sourceLine" id="cb8-64" title="64"><span class="co">#&gt; 17 23   1 0.45706380        1 0.45706380          0       1 4.143891723</span></a>
+<a class="sourceLine" id="cb8-65" title="65"><span class="co">#&gt; 18 24   1 0.09314261        1 0.91309530          0       1 2.018429318</span></a>
+<a class="sourceLine" id="cb8-66" title="66"><span class="co">#&gt; 19 25   1 0.56389389        1 0.56389389          0       1 3.687071947</span></a>
+<a class="sourceLine" id="cb8-67" title="67"><span class="co">#&gt; 20 26   1 0.47023947        1 0.47023947          0       1 4.227757026</span></a>
+<a class="sourceLine" id="cb8-68" title="68"><span class="co">#&gt; 21 27   1 0.22703896        1 0.22703896          0       1 4.133027100</span></a>
+<a class="sourceLine" id="cb8-69" title="69"><span class="co">#&gt; 22 29   1 0.46661062        1 0.51297590          0       1 6.289522646</span></a>
+<a class="sourceLine" id="cb8-70" title="70"><span class="co">#&gt; 23 38   2 0.15540772        1 0.15540772          0       1 1.464038296</span></a>
+<a class="sourceLine" id="cb8-71" title="71"><span class="co">#&gt; 24 40   2 0.04322971        1 0.04322971          1       0 6.785051292</span></a>
+<a class="sourceLine" id="cb8-72" title="72"><span class="co">#&gt; 25 41   2 0.54570637        1 0.54570637          0       1 4.364613695</span></a>
+<a class="sourceLine" id="cb8-73" title="73"><span class="co">#&gt; 26 43   2 0.24034500        0 0.24034500          1       0 6.587936003</span></a>
+<a class="sourceLine" id="cb8-74" title="74"><span class="co">#&gt; 27 44   2 1.63214588        1 1.63214588          0       1 1.881478205</span></a>
+<a class="sourceLine" id="cb8-75" title="75"><span class="co">#&gt; 28 45   2 0.58103357        1 0.58103357          0       1 5.467244969</span></a>
+<a class="sourceLine" id="cb8-76" title="76"><span class="co">#&gt; 29 54   2 0.34380339        1 0.74697844          0       1 2.132945149</span></a>
+<a class="sourceLine" id="cb8-77" title="77"><span class="co">#&gt; 30 59   2 0.09644431        1 0.27138395          0       1 5.442366586</span></a>
+<a class="sourceLine" id="cb8-78" title="78"><span class="co">#&gt; 31 61   2 0.45262441        1 1.01968087          0       1 5.125696822</span></a>
+<a class="sourceLine" id="cb8-79" title="79"><span class="co">#&gt; 32 62   2 0.05870165        1 0.05870165          0       1 5.439043818</span></a>
+<a class="sourceLine" id="cb8-80" title="80"><span class="co">#&gt; 33 65   2 0.49377546        1 0.49377546          0       1 4.180423580</span></a>
+<a class="sourceLine" id="cb8-81" title="81"><span class="co">#&gt; 34 68   2 0.12736172        1 0.12736172          0       1 3.157080468</span></a>
+<a class="sourceLine" id="cb8-82" title="82"><span class="co">#&gt; 35 74   2 0.07764841        0 0.07764841          1       0 6.750632599</span></a>
+<a class="sourceLine" id="cb8-83" title="83"><span class="co">#&gt; 36 76   2 0.60140979        1 0.60140979          0       1 5.403354042</span></a>
+<a class="sourceLine" id="cb8-84" title="84"><span class="co">#&gt; 37 79   2 0.03248963        1 0.03248963          0       1 0.871058516</span></a>
+<a class="sourceLine" id="cb8-85" title="85"><span class="co">#&gt; 38 82   2 0.19592203        1 0.19592203          0       1 0.017242287</span></a>
+<a class="sourceLine" id="cb8-86" title="86"><span class="co">#&gt; 39 83   2 0.06006929        1 1.21931632          0       1 3.657871913</span></a>
+<a class="sourceLine" id="cb8-87" title="87"><span class="co">#&gt; 40 86   2 0.11559171        1 0.11559171          0       1 3.960323525</span></a>
+<a class="sourceLine" id="cb8-88" title="88"><span class="co">#&gt; 41 88   2 0.09813191        1 1.79531539          0       1 0.935697695</span></a>
+<a class="sourceLine" id="cb8-89" title="89"><span class="co">#&gt; 42 89   2 0.51809902        1 0.51809902          0       1 1.062610177</span></a>
+<a class="sourceLine" id="cb8-90" title="90"><span class="co">#&gt;    OStimeCal PFStimeCal</span></a>
+<a class="sourceLine" id="cb8-91" title="91"><span class="co">#&gt; 1  4.8874357  4.8874357</span></a>
+<a class="sourceLine" id="cb8-92" title="92"><span class="co">#&gt; 2  6.6595026  6.6595026</span></a>
+<a class="sourceLine" id="cb8-93" title="93"><span class="co">#&gt; 3  5.1092051  3.2521749</span></a>
+<a class="sourceLine" id="cb8-94" title="94"><span class="co">#&gt; 4  0.5012809  0.5012809</span></a>
+<a class="sourceLine" id="cb8-95" title="95"><span class="co">#&gt; 5  0.6479031  0.6479031</span></a>
+<a class="sourceLine" id="cb8-96" title="96"><span class="co">#&gt; 6  5.5106229  5.5106229</span></a>
+<a class="sourceLine" id="cb8-97" title="97"><span class="co">#&gt; 7  6.8282810  6.3427925</span></a>
+<a class="sourceLine" id="cb8-98" title="98"><span class="co">#&gt; 8  5.3414752  5.3183034</span></a>
+<a class="sourceLine" id="cb8-99" title="99"><span class="co">#&gt; 9  1.6395909  1.6395909</span></a>
+<a class="sourceLine" id="cb8-100" title="100"><span class="co">#&gt; 10 2.2827753  2.2827753</span></a>
+<a class="sourceLine" id="cb8-101" title="101"><span class="co">#&gt; 11 4.4692312  4.4692312</span></a>
+<a class="sourceLine" id="cb8-102" title="102"><span class="co">#&gt; 12 1.4013272  1.4013272</span></a>
+<a class="sourceLine" id="cb8-103" title="103"><span class="co">#&gt; 13 1.9905144  1.9905144</span></a>
+<a class="sourceLine" id="cb8-104" title="104"><span class="co">#&gt; 14 4.3462819  4.3462819</span></a>
+<a class="sourceLine" id="cb8-105" title="105"><span class="co">#&gt; 15 5.9904963  5.9904963</span></a>
+<a class="sourceLine" id="cb8-106" title="106"><span class="co">#&gt; 16 3.4813115  3.4813115</span></a>
+<a class="sourceLine" id="cb8-107" title="107"><span class="co">#&gt; 17 4.6009555  4.6009555</span></a>
+<a class="sourceLine" id="cb8-108" title="108"><span class="co">#&gt; 18 2.9315246  2.1115719</span></a>
+<a class="sourceLine" id="cb8-109" title="109"><span class="co">#&gt; 19 4.2509658  4.2509658</span></a>
+<a class="sourceLine" id="cb8-110" title="110"><span class="co">#&gt; 20 4.6979965  4.6979965</span></a>
+<a class="sourceLine" id="cb8-111" title="111"><span class="co">#&gt; 21 4.3600661  4.3600661</span></a>
+<a class="sourceLine" id="cb8-112" title="112"><span class="co">#&gt; 22 6.8024985  6.7561333</span></a>
+<a class="sourceLine" id="cb8-113" title="113"><span class="co">#&gt; 23 1.6194460  1.6194460</span></a>
+<a class="sourceLine" id="cb8-114" title="114"><span class="co">#&gt; 24 6.8282810  6.8282810</span></a>
+<a class="sourceLine" id="cb8-115" title="115"><span class="co">#&gt; 25 4.9103201  4.9103201</span></a>
+<a class="sourceLine" id="cb8-116" title="116"><span class="co">#&gt; 26 6.8282810  6.8282810</span></a>
+<a class="sourceLine" id="cb8-117" title="117"><span class="co">#&gt; 27 3.5136241  3.5136241</span></a>
+<a class="sourceLine" id="cb8-118" title="118"><span class="co">#&gt; 28 6.0482785  6.0482785</span></a>
+<a class="sourceLine" id="cb8-119" title="119"><span class="co">#&gt; 29 2.8799236  2.4767485</span></a>
+<a class="sourceLine" id="cb8-120" title="120"><span class="co">#&gt; 30 5.7137505  5.5388109</span></a>
+<a class="sourceLine" id="cb8-121" title="121"><span class="co">#&gt; 31 6.1453777  5.5783212</span></a>
+<a class="sourceLine" id="cb8-122" title="122"><span class="co">#&gt; 32 5.4977455  5.4977455</span></a>
+<a class="sourceLine" id="cb8-123" title="123"><span class="co">#&gt; 33 4.6741990  4.6741990</span></a>
+<a class="sourceLine" id="cb8-124" title="124"><span class="co">#&gt; 34 3.2844422  3.2844422</span></a>
+<a class="sourceLine" id="cb8-125" title="125"><span class="co">#&gt; 35 6.8282810  6.8282810</span></a>
+<a class="sourceLine" id="cb8-126" title="126"><span class="co">#&gt; 36 6.0047638  6.0047638</span></a>
+<a class="sourceLine" id="cb8-127" title="127"><span class="co">#&gt; 37 0.9035481  0.9035481</span></a>
+<a class="sourceLine" id="cb8-128" title="128"><span class="co">#&gt; 38 0.2131643  0.2131643</span></a>
+<a class="sourceLine" id="cb8-129" title="129"><span class="co">#&gt; 39 4.8771882  3.7179412</span></a>
+<a class="sourceLine" id="cb8-130" title="130"><span class="co">#&gt; 40 4.0759152  4.0759152</span></a>
+<a class="sourceLine" id="cb8-131" title="131"><span class="co">#&gt; 41 2.7310131  1.0338296</span></a>
+<a class="sourceLine" id="cb8-132" title="132"><span class="co">#&gt; 42 1.5807092  1.5807092</span></a>
+<a class="sourceLine" id="cb8-133" title="133">simStudy_30POS</a>
+<a class="sourceLine" id="cb8-134" title="134"><span class="co">#&gt;    id trt    PFStime PFSevent     OStime CensoredOS OSevent recruitTime</span></a>
+<a class="sourceLine" id="cb8-135" title="135"><span class="co">#&gt; 1   2   1 0.26116360        1 0.26116360          0       1 4.626272118</span></a>
+<a class="sourceLine" id="cb8-136" title="136"><span class="co">#&gt; 2   4   1 0.56212147        1 2.41915162          0       1 2.690053477</span></a>
+<a class="sourceLine" id="cb8-137" title="137"><span class="co">#&gt; 3   6   1 0.47629626        1 0.47629626          0       1 0.024984612</span></a>
+<a class="sourceLine" id="cb8-138" title="138"><span class="co">#&gt; 4   7   1 0.64391257        1 0.64391257          0       1 0.003990494</span></a>
+<a class="sourceLine" id="cb8-139" title="139"><span class="co">#&gt; 5   9   1 0.26098435        0 0.26098435          1       0 5.236761118</span></a>
+<a class="sourceLine" id="cb8-140" title="140"><span class="co">#&gt; 6  12   1 0.62277501        1 0.64594684          0       1 4.695528368</span></a>
+<a class="sourceLine" id="cb8-141" title="141"><span class="co">#&gt; 7  13   1 0.12997017        1 0.12997017          0       1 1.509620696</span></a>
+<a class="sourceLine" id="cb8-142" title="142"><span class="co">#&gt; 8  14   1 1.04040922        1 1.04040922          0       1 1.242366128</span></a>
+<a class="sourceLine" id="cb8-143" title="143"><span class="co">#&gt; 9  15   1 0.02544847        1 0.02544847          0       1 4.443782684</span></a>
+<a class="sourceLine" id="cb8-144" title="144"><span class="co">#&gt; 10 17   1 0.57767544        1 0.57767544          0       1 0.823651729</span></a>
+<a class="sourceLine" id="cb8-145" title="145"><span class="co">#&gt; 11 18   1 0.09734062        1 0.09734062          0       1 1.893173764</span></a>
+<a class="sourceLine" id="cb8-146" title="146"><span class="co">#&gt; 12 19   1 0.16208977        1 0.16208977          0       1 4.184192105</span></a>
+<a class="sourceLine" id="cb8-147" title="147"><span class="co">#&gt; 13 22   1 0.04763364        1 0.04763364          0       1 3.433677910</span></a>
+<a class="sourceLine" id="cb8-148" title="148"><span class="co">#&gt; 14 23   1 0.45706380        1 0.45706380          0       1 4.143891723</span></a>
+<a class="sourceLine" id="cb8-149" title="149"><span class="co">#&gt; 15 24   1 0.09314261        1 0.91309530          0       1 2.018429318</span></a>
+<a class="sourceLine" id="cb8-150" title="150"><span class="co">#&gt; 16 25   1 0.56389389        1 0.56389389          0       1 3.687071947</span></a>
+<a class="sourceLine" id="cb8-151" title="151"><span class="co">#&gt; 17 26   1 0.47023947        1 0.47023947          0       1 4.227757026</span></a>
+<a class="sourceLine" id="cb8-152" title="152"><span class="co">#&gt; 18 27   1 0.22703896        1 0.22703896          0       1 4.133027100</span></a>
+<a class="sourceLine" id="cb8-153" title="153"><span class="co">#&gt; 19 38   2 0.15540772        1 0.15540772          0       1 1.464038296</span></a>
+<a class="sourceLine" id="cb8-154" title="154"><span class="co">#&gt; 20 41   2 0.54570637        1 0.54570637          0       1 4.364613695</span></a>
+<a class="sourceLine" id="cb8-155" title="155"><span class="co">#&gt; 21 44   2 1.63214588        1 1.63214588          0       1 1.881478205</span></a>
+<a class="sourceLine" id="cb8-156" title="156"><span class="co">#&gt; 22 45   2 0.03050050        0 0.03050050          1       0 5.467244969</span></a>
+<a class="sourceLine" id="cb8-157" title="157"><span class="co">#&gt; 23 54   2 0.34380339        1 0.74697844          0       1 2.132945149</span></a>
+<a class="sourceLine" id="cb8-158" title="158"><span class="co">#&gt; 24 59   2 0.05537888        0 0.05537888          1       0 5.442366586</span></a>
+<a class="sourceLine" id="cb8-159" title="159"><span class="co">#&gt; 25 61   2 0.37204864        0 0.37204864          1       0 5.125696822</span></a>
+<a class="sourceLine" id="cb8-160" title="160"><span class="co">#&gt; 26 62   2 0.05870165        1 0.05870165          0       1 5.439043818</span></a>
+<a class="sourceLine" id="cb8-161" title="161"><span class="co">#&gt; 27 65   2 0.49377546        1 0.49377546          0       1 4.180423580</span></a>
+<a class="sourceLine" id="cb8-162" title="162"><span class="co">#&gt; 28 68   2 0.12736172        1 0.12736172          0       1 3.157080468</span></a>
+<a class="sourceLine" id="cb8-163" title="163"><span class="co">#&gt; 29 76   2 0.09439142        0 0.09439142          1       0 5.403354042</span></a>
+<a class="sourceLine" id="cb8-164" title="164"><span class="co">#&gt; 30 79   2 0.03248963        1 0.03248963          0       1 0.871058516</span></a>
+<a class="sourceLine" id="cb8-165" title="165"><span class="co">#&gt; 31 82   2 0.19592203        1 0.19592203          0       1 0.017242287</span></a>
+<a class="sourceLine" id="cb8-166" title="166"><span class="co">#&gt; 32 83   2 0.06006929        1 1.21931632          0       1 3.657871913</span></a>
+<a class="sourceLine" id="cb8-167" title="167"><span class="co">#&gt; 33 86   2 0.11559171        1 0.11559171          0       1 3.960323525</span></a>
+<a class="sourceLine" id="cb8-168" title="168"><span class="co">#&gt; 34 88   2 0.09813191        1 1.79531539          0       1 0.935697695</span></a>
+<a class="sourceLine" id="cb8-169" title="169"><span class="co">#&gt; 35 89   2 0.51809902        1 0.51809902          0       1 1.062610177</span></a>
+<a class="sourceLine" id="cb8-170" title="170"><span class="co">#&gt;    OStimeCal PFStimeCal</span></a>
+<a class="sourceLine" id="cb8-171" title="171"><span class="co">#&gt; 1  4.8874357  4.8874357</span></a>
+<a class="sourceLine" id="cb8-172" title="172"><span class="co">#&gt; 2  5.1092051  3.2521749</span></a>
+<a class="sourceLine" id="cb8-173" title="173"><span class="co">#&gt; 3  0.5012809  0.5012809</span></a>
+<a class="sourceLine" id="cb8-174" title="174"><span class="co">#&gt; 4  0.6479031  0.6479031</span></a>
+<a class="sourceLine" id="cb8-175" title="175"><span class="co">#&gt; 5  5.4977455  5.4977455</span></a>
+<a class="sourceLine" id="cb8-176" title="176"><span class="co">#&gt; 6  5.3414752  5.3183034</span></a>
+<a class="sourceLine" id="cb8-177" title="177"><span class="co">#&gt; 7  1.6395909  1.6395909</span></a>
+<a class="sourceLine" id="cb8-178" title="178"><span class="co">#&gt; 8  2.2827753  2.2827753</span></a>
+<a class="sourceLine" id="cb8-179" title="179"><span class="co">#&gt; 9  4.4692312  4.4692312</span></a>
+<a class="sourceLine" id="cb8-180" title="180"><span class="co">#&gt; 10 1.4013272  1.4013272</span></a>
+<a class="sourceLine" id="cb8-181" title="181"><span class="co">#&gt; 11 1.9905144  1.9905144</span></a>
+<a class="sourceLine" id="cb8-182" title="182"><span class="co">#&gt; 12 4.3462819  4.3462819</span></a>
+<a class="sourceLine" id="cb8-183" title="183"><span class="co">#&gt; 13 3.4813115  3.4813115</span></a>
+<a class="sourceLine" id="cb8-184" title="184"><span class="co">#&gt; 14 4.6009555  4.6009555</span></a>
+<a class="sourceLine" id="cb8-185" title="185"><span class="co">#&gt; 15 2.9315246  2.1115719</span></a>
+<a class="sourceLine" id="cb8-186" title="186"><span class="co">#&gt; 16 4.2509658  4.2509658</span></a>
+<a class="sourceLine" id="cb8-187" title="187"><span class="co">#&gt; 17 4.6979965  4.6979965</span></a>
+<a class="sourceLine" id="cb8-188" title="188"><span class="co">#&gt; 18 4.3600661  4.3600661</span></a>
+<a class="sourceLine" id="cb8-189" title="189"><span class="co">#&gt; 19 1.6194460  1.6194460</span></a>
+<a class="sourceLine" id="cb8-190" title="190"><span class="co">#&gt; 20 4.9103201  4.9103201</span></a>
+<a class="sourceLine" id="cb8-191" title="191"><span class="co">#&gt; 21 3.5136241  3.5136241</span></a>
+<a class="sourceLine" id="cb8-192" title="192"><span class="co">#&gt; 22 5.4977455  5.4977455</span></a>
+<a class="sourceLine" id="cb8-193" title="193"><span class="co">#&gt; 23 2.8799236  2.4767485</span></a>
+<a class="sourceLine" id="cb8-194" title="194"><span class="co">#&gt; 24 5.4977455  5.4977455</span></a>
+<a class="sourceLine" id="cb8-195" title="195"><span class="co">#&gt; 25 5.4977455  5.4977455</span></a>
+<a class="sourceLine" id="cb8-196" title="196"><span class="co">#&gt; 26 5.4977455  5.4977455</span></a>
+<a class="sourceLine" id="cb8-197" title="197"><span class="co">#&gt; 27 4.6741990  4.6741990</span></a>
+<a class="sourceLine" id="cb8-198" title="198"><span class="co">#&gt; 28 3.2844422  3.2844422</span></a>
+<a class="sourceLine" id="cb8-199" title="199"><span class="co">#&gt; 29 5.4977455  5.4977455</span></a>
+<a class="sourceLine" id="cb8-200" title="200"><span class="co">#&gt; 30 0.9035481  0.9035481</span></a>
+<a class="sourceLine" id="cb8-201" title="201"><span class="co">#&gt; 31 0.2131643  0.2131643</span></a>
+<a class="sourceLine" id="cb8-202" title="202"><span class="co">#&gt; 32 4.8771882  3.7179412</span></a>
+<a class="sourceLine" id="cb8-203" title="203"><span class="co">#&gt; 33 4.0759152  4.0759152</span></a>
+<a class="sourceLine" id="cb8-204" title="204"><span class="co">#&gt; 34 2.7310131  1.0338296</span></a>
+<a class="sourceLine" id="cb8-205" title="205"><span class="co">#&gt; 35 1.5807092  1.5807092</span></a></code></pre></div>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-meller2019joint">
+<p>Meller, Matthias, Jan Beyersmann, and Kaspar Rufibach. 2019. “Joint Modeling of Progression-Free and Overall Survival and Computation of Correlation Measures.” <em>Statistics in Medicine</em> 38 (22): 4270–89.</p>
+</div>
+<div id="ref-rpact">
+<p>Wassmer, Gernot, and Friedrich Pahlke. 2021. <em>Rpact: Confirmatory Adaptive Clinical Trial Design and Analysis</em>. <a href="https://CRAN.R-project.org/package=rpact">https://CRAN.R-project.org/package=rpact</a>.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
