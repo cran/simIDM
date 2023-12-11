@@ -22,11 +22,12 @@ Useful links:
 Authors:
 \itemize{
   \item Kaspar Rufibach \email{kaspar.rufibach@roche.com}
+  \item Holger Löwe \email{hbj.loewe@gmail.com}
+  \item Daniel Sabanés Bové \email{daniel.sabanes_bove@roche.com}
 }
 
 Other contributors:
 \itemize{
-  \item Daniel Sabanes Bove \email{daniel.sabanes_bove@roche.com} [contributor]
   \item F. Hoffmann-La Roche AG [copyright holder, funder]
   \item University of Ulm [copyright holder, funder]
 }

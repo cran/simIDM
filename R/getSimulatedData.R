@@ -196,17 +196,17 @@ getSimulatedData <- function(N,
     # For distribution of waiting time in the initial state the all-cause hazard (h01+h02) is needed.
     wait_time <- getWaitTimeSum(U, h$h01, h$h02, p$p01, p$p02, entry)
     # A binomial experiment decides on death or progression.
-    numerator <- p$p01 * h$h01^p$p01 * wait_time^(p$p01 - 1) # nolint
-    denumerator <- numerator + p$p02 * h$h02^p$p02 * wait_time^(p$p02 - 1) # nolint
+    numerator <- p$p01 * h$h01 * wait_time^(p$p01 - 1) # nolint
+    denumerator <- numerator + p$p02 * h$h02 * wait_time^(p$p02 - 1) # nolint
 
     # Piecewise exponential distributed survival times.
   } else if (transition$family == "piecewise exponential") {
     Sum_PCW <- getSumPCW(h$h01, h$h02, pw$pw01, pw$pw02)
     wait_time <- getPCWDistr(U, Sum_PCW$hazards, Sum_PCW$intervals, entry)
     # A binomial experiment decides on death or progression.
-    numerator <- getPCWHazard(h$h01, pw$pw01, wait_time)
-    denumerator <- getPCWHazard(h$h01, pw$pw01, wait_time) +
-      getPCWHazard(h$h02, pw$pw02, wait_time)
+    numerator <- getPWCHazard(h$h01, pw$pw01, wait_time)
+    denumerator <- getPWCHazard(h$h01, pw$pw01, wait_time) +
+      getPWCHazard(h$h02, pw$pw02, wait_time)
   }
 
   to_prob <- stats::rbinom(N, 1, numerator / denumerator)
@@ -221,11 +221,14 @@ getSimulatedData <- function(N,
     id = 1:N, from = from, to = to, entry = entry, exit = exit,
     censTime = censTime, stringsAsFactors = FALSE
   )
-  # Add  1 -> 2 transition only for patients that are in the intermediate state 1.
-  simDataOne <- simData[simData$to == 1, ]
-  newrows <- getOneToTwoRows(simDataOne, transition)
-  simData <- rbind(simData, newrows)
-  simData <- simData[order(simData$id), ]
+  is_intermediate_state <- simData$to == 1
+  if (any(is_intermediate_state)) {
+    # Add 1 -> 2 transition only for patients that are in the intermediate state 1.
+    simDataOne <- simData[is_intermediate_state, ]
+    newrows <- getOneToTwoRows(simDataOne, transition)
+    simData <- rbind(simData, newrows)
+    simData <- simData[order(simData$id), ]
+  }
   # Add staggered study entry, i.e. study entry at calendar time.
   simData <- addStaggeredEntry(
     simData = simData,

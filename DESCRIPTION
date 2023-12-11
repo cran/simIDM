@@ -1,11 +1,12 @@
 Type: Package
 Package: simIDM
 Title: Simulating Oncology Trials using an Illness-Death Model
-Version: 0.0.5
+Version: 0.1.0
 Authors@R: c(
     person("Alexandra", "Erdmann", , "alexandra.erdmann@uni-ulm.de", role = c("aut", "cre")),
     person("Kaspar", "Rufibach", , "kaspar.rufibach@roche.com", role = "aut"),
-    person("Daniel", "Sabanes Bove", , "daniel.sabanes_bove@roche.com", role = "ctb"),
+    person("Holger", "Löwe", , "hbj.loewe@gmail.com", role = "aut"),
+    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = "aut"),
     person("F. Hoffmann-La Roche AG", role = c("cph", "fnd")),
     person("University of Ulm", role = c("cph", "fnd"))
   )
@@ -16,25 +17,27 @@ Description: Based on the illness-death model a large number of clinical
     for random and event-driven censoring, an arbitrary number of
     treatment arms, staggered study entry and drop-out.  Exponentially,
     Weibull and piecewise exponentially distributed survival times can be
-    generated.
+    generated. The correlation between PFS and OS can be calculated.
 License: Apache License 2.0
 URL: https://github.com/insightsengineering/simIDM/
 BugReports: https://github.com/insightsengineering/simIDM/issues
 Depends: R (>= 3.6)
-Imports: checkmate, stats
-Suggests: coxphw, knitr, mvna, prodlim, rmarkdown, survival, testthat
-        (>= 2.0)
+Imports: checkmate, furrr, future, mstate, parallelly, stats, survival
+Suggests: coxphw, knitr, mvna, prodlim, rmarkdown, rpact, testthat (>=
+        3.0.0)
 VignetteBuilder: knitr
+Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 RoxygenNote: 7.2.3
 NeedsCompilation: no
-Packaged: 2023-01-27 10:08:23 UTC; sabanesd
+Packaged: 2023-12-11 09:17:50 UTC; sabanesd
 Author: Alexandra Erdmann [aut, cre],
   Kaspar Rufibach [aut],
-  Daniel Sabanes Bove [ctb],
+  Holger Löwe [aut],
+  Daniel Sabanés Bové [aut],
   F. Hoffmann-La Roche AG [cph, fnd],
   University of Ulm [cph, fnd]
 Maintainer: Alexandra Erdmann <alexandra.erdmann@uni-ulm.de>
 Repository: CRAN
-Date/Publication: 2023-01-27 16:40:02 UTC
+Date/Publication: 2023-12-11 10:20:02 UTC

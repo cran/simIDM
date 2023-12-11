@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ---- echo=FALSE,  fig.cap = "Figure 1 - Multistate model with indermediate state progession and absorbing state death",fig.height = 5, fig.width = 8, out.width = "60%"----
+## ----echo=FALSE,  fig.cap = "Figure 1 - Multistate model with indermediate state progession and absorbing state death",fig.height = 5, fig.width = 8, out.width = "60%"----
 library(prodlim)
 plotIllnessDeathModel(
   style = 1, box1.label = "0: initial state", box2.label = "1: progression",
