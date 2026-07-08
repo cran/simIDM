@@ -1,3 +1,13 @@
+# simIDM 0.1.1
+
+### Bug Fixes
+
+-   `corPFSOS` now undoes the `future` plan upon function exit.
+
+### Miscellaneous
+
+-   Change of maintainer.
+
 # simIDM 0.1.0
 
 ### New Features

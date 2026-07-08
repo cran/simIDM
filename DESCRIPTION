@@ -1,12 +1,12 @@
 Type: Package
 Package: simIDM
 Title: Simulating Oncology Trials using an Illness-Death Model
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
-    person("Alexandra", "Erdmann", , "alexandra.erdmann@uni-ulm.de", role = c("aut", "cre")),
-    person("Kaspar", "Rufibach", , "kaspar.rufibach@roche.com", role = "aut"),
+    person("Alexandra", "Erdmann", , "alexandra.erdmann@boehringer-ingelheim.com", role = "aut"),
+    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@rconis.com", role = c("aut", "cre")),
+    person("Kaspar", "Rufibach", , "kaspar.rufibach@merckgroup.com", role = "aut"),
     person("Holger", "Löwe", , "hbj.loewe@gmail.com", role = "aut"),
-    person("Daniel", "Sabanés Bové", , "daniel.sabanes_bove@roche.com", role = "aut"),
     person("F. Hoffmann-La Roche AG", role = c("cph", "fnd")),
     person("University of Ulm", role = c("cph", "fnd"))
   )
@@ -29,15 +29,15 @@ VignetteBuilder: knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
-RoxygenNote: 7.2.3
+Config/roxygen2/version: 8.0.0
 NeedsCompilation: no
-Packaged: 2023-12-11 09:17:50 UTC; sabanesd
-Author: Alexandra Erdmann [aut, cre],
+Packaged: 2026-07-08 02:55:24 UTC; daniel
+Author: Alexandra Erdmann [aut],
+  Daniel Sabanés Bové [aut, cre],
   Kaspar Rufibach [aut],
   Holger Löwe [aut],
-  Daniel Sabanés Bové [aut],
   F. Hoffmann-La Roche AG [cph, fnd],
   University of Ulm [cph, fnd]
-Maintainer: Alexandra Erdmann <alexandra.erdmann@uni-ulm.de>
+Maintainer: Daniel Sabanés Bové <daniel.sabanes_bove@rconis.com>
 Repository: CRAN
-Date/Publication: 2023-12-11 10:20:02 UTC
+Date/Publication: 2026-07-08 06:10:02 UTC
